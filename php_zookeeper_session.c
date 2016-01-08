@@ -162,6 +162,7 @@ static zend_bool php_zookeeper_sess_lock(php_zookeeper_session *session, const c
 
 	return 0;
 }
+/* }}} */
 
 /* {{{ PS_READ_FUNC(zookeeper)
 */

@@ -553,6 +553,7 @@ static PHP_METHOD(Zookeeper, getState)
 	state = zoo_state(i_obj->zk);
 	RETURN_LONG(state);
 }
+/* }}} */
 
 /* {{{ Zookeeper::getRecvTimeout( .. )
    */
@@ -570,6 +571,7 @@ static PHP_METHOD(Zookeeper, getRecvTimeout)
 	recv_timeout = zoo_recv_timeout(i_obj->zk);
 	RETURN_LONG(recv_timeout);
 }
+/* }}} */
 
 /* {{{ Zookeeper::isRecoverable( .. )
    */
@@ -587,6 +589,7 @@ static PHP_METHOD(Zookeeper, isRecoverable)
 	result = is_unrecoverable(i_obj->zk);
 	RETURN_BOOL(!result);
 }
+/* }}} */
 
 /* {{{ Zookeeper::setDebugLevel( .. )
    */
@@ -602,6 +605,7 @@ static PHP_METHOD(Zookeeper, setDebugLevel)
 	zoo_set_debug_level((ZooLogLevel)level);
 	RETURN_TRUE;
 }
+/* }}} */
 
 /* {{{ Zookeeper::setDeterministicConnOrder( .. )
    */
@@ -617,6 +621,7 @@ static PHP_METHOD(Zookeeper, setDeterministicConnOrder)
 	zoo_deterministic_conn_order(value);
 	RETURN_TRUE;
 }
+/* }}} */
 
 /* {{{ Zookeeper::addAuth( .. )
    */
