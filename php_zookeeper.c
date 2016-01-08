@@ -145,7 +145,7 @@ static void php_zookeeper_connect_impl(INTERNAL_FUNCTION_PARAMETERS, char *host,
    Connects to a zookeeper host */
 static PHP_METHOD(Zookeeper, connect)
 {
-	int host_len;
+	size_t host_len;
 	char *host;
 	zend_fcall_info fci = empty_fcall_info;
 	zend_fcall_info_cache fcc = empty_fcall_info_cache;
@@ -165,7 +165,7 @@ static PHP_METHOD(Zookeeper, connect)
 static PHP_METHOD(Zookeeper, __construct)
 {
 	zval *object = getThis();
-	int host_len = 0;
+	size_t host_len = 0;
 	char *host = NULL;
 	zend_fcall_info fci = empty_fcall_info;
 	zend_fcall_info_cache fcc = empty_fcall_info_cache;
@@ -190,7 +190,7 @@ static PHP_METHOD(Zookeeper, __construct)
 static PHP_METHOD(Zookeeper, create)
 {
 	char *path, *value = NULL;
-	int path_len, value_len;
+	size_t path_len, value_len;
 	zval *acl_info = NULL;
 	long flags = 0;
 	zend_string *realpath;
@@ -236,7 +236,7 @@ static PHP_METHOD(Zookeeper, create)
 static PHP_METHOD(Zookeeper, delete)
 {
 	char *path;
-	int path_len;
+	size_t path_len;
 	long version = -1;
 	int status = ZOK;
 
@@ -264,7 +264,7 @@ static PHP_METHOD(Zookeeper, delete)
 static PHP_METHOD(Zookeeper, getChildren)
 {
 	char *path;
-	int path_len;
+	size_t path_len;
 	zend_fcall_info fci = empty_fcall_info;
 	zend_fcall_info_cache fcc = empty_fcall_info_cache;
 	php_cb_data_t *cb_data = NULL;
@@ -303,7 +303,7 @@ static PHP_METHOD(Zookeeper, getChildren)
 static PHP_METHOD(Zookeeper, get)
 {
 	char *path;
-	int path_len;
+	size_t path_len;
 	zend_fcall_info fci = empty_fcall_info;
 	zend_fcall_info_cache fcc = empty_fcall_info_cache;
 	zval *stat_info = NULL;
@@ -380,7 +380,7 @@ static PHP_METHOD(Zookeeper, get)
 static PHP_METHOD(Zookeeper, exists)
 {
 	char *path;
-	int path_len;
+	size_t path_len;
 	zend_fcall_info fci = empty_fcall_info;
 	zend_fcall_info_cache fcc = empty_fcall_info_cache;
 	php_cb_data_t *cb_data = NULL;
@@ -420,7 +420,7 @@ static PHP_METHOD(Zookeeper, exists)
 static PHP_METHOD(Zookeeper, set)
 {
 	char *path, *value = NULL;
-	int path_len, value_len;
+	size_t path_len, value_len;
 	long version = -1;
 	zval *stat_info = NULL;
 	struct Stat stat, *stat_ptr = NULL;
@@ -480,7 +480,7 @@ static PHP_METHOD(Zookeeper, getClientId)
 static PHP_METHOD(Zookeeper, getAcl)
 {
 	char *path;
-	int path_len;
+	size_t path_len;
 	int status = ZOK;
 	struct ACL_vector aclv;
 	struct Stat stat;
@@ -512,7 +512,7 @@ static PHP_METHOD(Zookeeper, getAcl)
 static PHP_METHOD(Zookeeper, setAcl)
 {
 	char *path;
-	int path_len;
+	size_t path_len;
 	long version;
 	zval *acl_info;
 	struct ACL_vector aclv;
@@ -623,7 +623,7 @@ static PHP_METHOD(Zookeeper, setDeterministicConnOrder)
 static PHP_METHOD(Zookeeper, addAuth)
 {
 	char *scheme, *cert;
-	int scheme_len, cert_len;
+	size_t scheme_len, cert_len;
 	zend_fcall_info fci = empty_fcall_info;
 	zend_fcall_info_cache fcc = empty_fcall_info_cache;
 	int status = ZOK;
