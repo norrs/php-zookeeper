@@ -358,7 +358,7 @@ static PHP_METHOD(Zookeeper, get)
 	}
 
 	if (stat_info) {
-		zval_dtor(stat_info);
+		zval_ptr_dtor(stat_info);
 		php_stat_to_array(&stat, stat_info);
 	}
 
@@ -444,6 +444,7 @@ static PHP_METHOD(Zookeeper, set)
 	}
 
 	if (stat_info) {
+		zval_ptr_dtor(stat_info);
 		php_stat_to_array(stat_ptr, stat_info);
 	}
 
@@ -801,15 +802,14 @@ static void php_zk_watcher_marshal(zhandle_t *zk, int type, int state, const cha
 	cb_data->fci.param_count = 3;
 
 	if (zend_call_function(&cb_data->fci, &cb_data->fcc TSRMLS_CC) == SUCCESS) {
-		zval_dtor(&retval);
+		zval_ptr_dtor(&retval);
 	} else {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "could not invoke watcher callback");
 	}
 
-	// TODO hakon: zval_dtor? zval_dtor_for_ptr? None of them?
-	zval_dtor(&z_type);
-	zval_dtor(&z_state);
-	zval_dtor(&z_path);
+	zval_ptr_dtor(&z_type);
+	zval_ptr_dtor(&z_state);
+	zval_ptr_dtor(&z_path);
 
 	if (cb_data->oneshot) {
 		zend_hash_index_del(&ZK_G(callbacks), cb_data->h);
@@ -839,7 +839,7 @@ static void php_zk_completion_marshal(int rc, const void *context)
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "could not invoke completion callback");
 	}
 
-	zval_dtor(&z_rc);
+	zval_ptr_dtor(&z_rc);
 
 	if (cb_data->oneshot) {
 		zend_hash_index_del(&ZK_G(callbacks), cb_data->h);
