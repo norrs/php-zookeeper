@@ -319,15 +319,10 @@ static PHP_METHOD(Zookeeper, get)
 
 	ZK_METHOD_FETCH_OBJECT;
 
-	if (fci.size != 0) {
-		cb_data = php_cb_data_new(&fci, &fcc, 1 TSRMLS_CC);
-	}
-
 	if (max_size <= 0) {
 		status = zoo_exists(i_obj->zk, path, 1, &stat);
 
 		if (status != ZOK) {
-			php_cb_data_destroy(cb_data);
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "error: %s", zerror(status));
 			return;
 		}
@@ -339,6 +334,10 @@ static PHP_METHOD(Zookeeper, get)
 	if (length <= 0) /* znode carries a NULL */
 		RETURN_NULL();
 
+
+	if (fci.size != 0) {
+		cb_data = php_cb_data_new(&fci, &fcc, 1 TSRMLS_CC);
+	}
 	buffer = zend_string_alloc(length, 0);
 	status = zoo_wget(i_obj->zk, path, (fci.size != 0) ? php_zk_watcher_marshal : NULL,
 					  cb_data, ZSTR_VAL(buffer), &length, &stat);
