@@ -118,7 +118,6 @@ static void php_zookeeper_connect_impl(INTERNAL_FUNCTION_PARAMETERS, char *host,
 
 	if (recv_timeout <= 0) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "recv_timeout parameter has to be greater than 0");
-		ZVAL_NULL(object);
 		return;
 	}
 
@@ -133,7 +132,6 @@ static void php_zookeeper_connect_impl(INTERNAL_FUNCTION_PARAMETERS, char *host,
 	if (zk == NULL) {
 		php_error_docref(NULL TSRMLS_CC, E_ERROR, "could not init zookeeper instance");
 		/* not reached */
-		ZVAL_NULL(object);
 		return;
 	}
 
@@ -172,7 +170,6 @@ static PHP_METHOD(Zookeeper, __construct)
 	long recv_timeout = ZK_G(recv_timeout);
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|sf!l", &host, &host_len, &fci, &fcc, &recv_timeout) == FAILURE) {
-		ZVAL_NULL(object);
 		return;
 	}
 
