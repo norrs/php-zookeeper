@@ -315,7 +315,7 @@ static PHP_METHOD(Zookeeper, get)
 	int length;
 	ZK_METHOD_INIT_VARS;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|f!zl", &path, &path_len, &fci,
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|f!z/l", &path, &path_len, &fci,
 							  &fcc, &stat_info, &max_size) == FAILURE) {
 		return;
 	}
@@ -427,7 +427,7 @@ static PHP_METHOD(Zookeeper, set)
 	int status = ZOK;
 	ZK_METHOD_INIT_VARS;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss!|lz", &path, &path_len,
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss!|lz/", &path, &path_len,
 							  &value, &value_len, &version, &stat_info) == FAILURE) {
 		return;
 	}
