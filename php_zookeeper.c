@@ -762,9 +762,7 @@ static php_cb_data_t* php_cb_data_new(zend_fcall_info *fci, zend_fcall_info_cach
 	cbd->fcc = *fcc;
 	cbd->oneshot = oneshot;
 	zend_hash_next_index_insert_ptr(&ZK_G(callbacks), cbd);
-	// TODO hakon: check is this right after elements have been removed?
-	// TODO hakon: check what is callbacks even used for... never read?
-	cbd->h = zend_hash_num_elements(&ZK_G(callbacks))-1;
+	cbd->h = zend_hash_next_free_element(&ZK_G(callbacks))-1;
 	return cbd;
 }
 
