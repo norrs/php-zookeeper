@@ -708,6 +708,10 @@ static PHP_METHOD(Zookeeper, setLogStream)
 
 	zoo_set_log_stream(fp);
 
+	if (Z_TYPE_P(zstream) != IS_RESOURCE) {
+		php_stream_free(stream, PHP_STREAM_FREE_CLOSE_CASTED);
+	}
+
 	RETURN_TRUE;
 }
 /* }}} */
